@@ -5,10 +5,10 @@
     --font-onest: "Onest",
         sans-serif;
     --border-rounded: .4em;
-    --bg-dark: hwb(227 3% 83%);
+    --bg-dark: hwb(225 4% 89%);
     --bg-ligth: hwb(228 96% 2%);
     --border: 1px solid hwb(0 83% 17%);
-    --bg-secondary-dark: hwb(241 10% 67%);
+    --bg-secondary-dark: hwb(240 1% 91%);
 }
 
 * {
@@ -47,13 +47,14 @@ body {
 
 /* info box */
 .info-box {
-    display: none;
+    opacity: 0;
+    pointer-events: none;
     top: 50%;
     left: 50%;
     width: 540px;
     position: absolute;
     border-radius: var(--border-rounded);
-    transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%) scale(0.9);
     background-color: var(--bg-secondary-dark);
 
     /* style infi title */
@@ -151,13 +152,14 @@ body {
 }
 
 .quiz_box {
-    display: none;
     top: 50%;
     left: 50%;
     width: 100%;
     max-width: 550px;
     position: absolute;
-    transform: translate(-50%, -50%);
+    /*opacity: 0;*/
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.9);
     border-radius: var(--border-rounded);
     background-color: var(--bg-secondary-dark);
 
@@ -324,6 +326,77 @@ body {
 
             &:hover {
                 background-color: hwb(208 35% 0% / 0.493);
+            }
+        }
+    }
+}
+
+.result-box {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-between;
+
+    top: 50%;
+    left: 50%;
+    opacity: 0;
+    width: 450px;
+    padding: 1.4em 2em;
+    text-align: center;
+    position: absolute;
+    pointer-events: none;
+    transform: translate(-50%, -50%) scale(0.9);
+    border-radius: var(--border-rounded);
+    background-color: var(--bg-secondary-dark);
+
+    /* style icon */
+    .icon {
+        font-size: 5em;
+        margin-bottom: .3em;
+    }
+
+    /* style complete text */
+    .complete-text {
+        font-size: 1.5em;
+        font-weight: 400;
+    }
+
+    /* score text */
+    .score-text span {
+        gap: .3em;
+        display: flex;
+        margin: .7em 0;
+        font-size: 1.08em;
+
+        p {
+            font-weight: 500;
+        }
+    }
+
+    /* style buttons */
+    .buttons {
+        display: flex;
+        margin: 20px 0;
+
+        button {
+            border: none;
+            height: 40px;
+            outline: none;
+            font-size: 1em;
+            margin: 0 10px;
+            cursor: pointer;
+            padding: 0 20px;
+            font-weight: 400;
+            color: var(--bg-ligth);
+            border-radius: var(--border-rounded);
+
+            &:first-child {
+                background-color: hwb(240 0% 0%);
+            }
+
+            &:last-child {
+                background-color: transparent;
+                border: 1px solid var(--bg-ligth);
             }
         }
     }

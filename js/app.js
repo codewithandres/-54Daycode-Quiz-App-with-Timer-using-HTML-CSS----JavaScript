@@ -19,12 +19,26 @@ continueBtn.addEventListener('click', () => {
 
 let queCount = 0;
 
+const nextBtn = quizBox.querySelector('.next-btn');
+
+nextBtn.addEventListener('click', () => {
+
+    if (queCount < questions.length - 1) {
+
+        queCount++;
+        showQuestion(queCount);
+    } else {
+
+        console.log('Question completed.');
+    };
+});
+
 const showQuestion = index => {
 
     const quuText = document.querySelector('.que_text');
     const optionList = document.querySelector('.option_list');
 
-    let queTag = `<p>${questions[index].question}</p>`;
+    let queTag = `<p>${questions[index].numb}. ${questions[index].question}</p>`;
     let optionTag = `
 
         <article class="option">

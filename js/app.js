@@ -49,12 +49,12 @@ const showQuestion = index => {
 
         <article class="option">
             <p>${questions[index].options[0]}</p>
-            <span class="icon tick"><i class="ri-check-fill"></i></span>
+            
         </article>
         
         <article class="option">
             <p>${questions[index].options[1]}</p>
-            <span class="icon croos"><i class="ri-close-line"></i></span>
+           
         </article>
 
         <article class="option">
@@ -81,6 +81,9 @@ const showQuestion = index => {
     //console.log(options);
 };
 
+let tickIcon = `<span class="icon tick"><i class="ri-check-fill"></i></span>`;
+let corssIcon = ` <span class="icon croos"><i class="ri-close-line"></i></span>`;
+
 const optionSelected = answer => {
 
     let userAnds = answer.textContent;
@@ -89,14 +92,17 @@ const optionSelected = answer => {
 
     if (userAnds === correntAns) {
         answer.parentElement.classList.add('correct');
+        answer.parentElement.insertAdjacentHTML('beforeend', tickIcon);
     }
     else {
         answer.parentElement.classList.add('incorrect');
+        answer.parentElement.insertAdjacentHTML('beforeend', corssIcon);
 
         for (let i = 0; i < allOption; i++) {
             if (optionList.children[i].textContent.trim() == correntAns) {
-                console.log(`esta opcion es la correcta `);
+
                 optionList.children[i].classList.add('correct');
+                optionList.children[i].insertAdjacentHTML('beforeend', tickIcon);
             };
         };
     };

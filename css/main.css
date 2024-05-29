@@ -189,6 +189,16 @@ body {
         box-shadow: 0 3px 5px 1px hwb(0 0% 100% / 0.1);
         border-radius: var(--border-rounded), var(--border-rounded), 0, 0;
 
+        /* style time line */
+        .time_line {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50%;
+            background-color: hwb(219 0% 0%);
+            height: 3px;
+        }
+
         /* style header title  */
         .title {
             font-size: 1.6em;
@@ -349,6 +359,7 @@ body {
         }
 
         .next-btn {
+            display: none;
             border: none;
             height: 40px;
             outline: none;

@@ -6,6 +6,8 @@ const startBtn = document.querySelector('.start_btn button'),
     continueBtn = infoBox.querySelector('.buttons .restart'),
     quizBox = document.querySelector('.quiz_box');
 const optionList = document.querySelector('.option_list');
+const timeCount = document.querySelector('.timer .timer_second')
+const timeLine = document.querySelector('.time_line');
 
 startBtn.addEventListener('click', () => infoBox.classList.add('active'));
 
@@ -18,10 +20,16 @@ continueBtn.addEventListener('click', () => {
 
     showQuestion(0);
     queCounter(1);
+    startTimer(15);
+    counterTimeLIne(0)
 });
 
 let queCount = 0;
 let queButtom = 1;
+let counter;
+let couterLine;
+let timeValue = 15;
+let valueWhidth = 0;
 
 const nextBtn = quizBox.querySelector('.next-btn');
 
@@ -34,6 +42,10 @@ nextBtn.addEventListener('click', () => {
 
         showQuestion(queCount);
         queCounter(queButtom);
+        clearInterval(counter);
+        startTimer(timeValue);
+        clearInterval(couterLine);
+        counterTimeLIne(valueWhidth);
     } else {
 
         console.log('Question completed.');
@@ -76,9 +88,7 @@ const showQuestion = index => {
     [...options].map(option => {
 
         option.addEventListener('click', event => optionSelected(event.target));
-        //option.setAttribute('onclick', 'optionSelected(this)');
     });
-    //console.log(options);
 };
 
 let tickIcon = `<span class="icon tick"><i class="ri-check-fill"></i></span>`;
@@ -90,6 +100,8 @@ const optionSelected = answer => {
     let correntAns = questions[queCount].answer;
     let allOption = optionList.children.length;
 
+    clearInterval(counter);
+    clearInterval(couterLine)
     if (userAnds === correntAns) {
         answer.parentElement.classList.add('correct');
         answer.parentElement.insertAdjacentHTML('beforeend', tickIcon);
@@ -112,6 +124,34 @@ const optionSelected = answer => {
     };
 
 };
+
+const startTimer = time => {
+
+    counter = setInterval(() => {
+        timeCount.textContent = `${time}s`;
+        time--;
+
+        if (time < 9) {
+            let addZero = timeCount.textContent;
+
+        };
+
+        if (time < 0) {
+            clearInterval(counter)
+            timeCount.textContent = `0:0s`
+        };
+    }, 1000);
+};
+
+const counterTimeLIne = time => {
+
+    couterLine = setInterval(() => {
+        time += 1;
+        timeLine.style.width = `${time}px`
+        if (time > 549) clearInterval(couterLine);
+    }, 29);
+};
+
 
 const queCounter = index => {
 

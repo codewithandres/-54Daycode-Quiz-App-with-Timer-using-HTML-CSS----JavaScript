@@ -9,6 +9,7 @@
     --bg-ligth: hwb(228 96% 2%);
     --border: 1px solid hwb(0 83% 17%);
     --bg-secondary-dark: hwb(240 1% 91%);
+    --transition-active: all 300ms cubic-bezier(0.175, 0.885, 0.32, 1.275)
 }
 
 * {
@@ -45,6 +46,16 @@ body {
     }
 }
 
+/* info active, .quiz active */
+
+.info-box.active,
+.quiz_box.activeQuiz {
+    z-index: 5;
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%) scale(1);
+}
+
 /* info box */
 .info-box {
     opacity: 0;
@@ -54,8 +65,9 @@ body {
     width: 540px;
     position: absolute;
     border-radius: var(--border-rounded);
-    transform: translate(-50%, -50%) scale(0.9);
+    transform: translate(-50%, -50%) scale(0.6);
     background-color: var(--bg-secondary-dark);
+    transition: var(--transition-active);
 
     /* style infi title */
     .info-title {
@@ -154,14 +166,15 @@ body {
 .quiz_box {
     top: 50%;
     left: 50%;
+    opacity: 0;
     width: 100%;
     max-width: 550px;
     position: absolute;
-    /*opacity: 0;*/
     pointer-events: none;
-    transform: translate(-50%, -50%) scale(0.9);
+    transition: var(--transition-active);
     border-radius: var(--border-rounded);
     background-color: var(--bg-secondary-dark);
+    transform: translate(-50%, -50%) scale(0.9);
 
     /* style header quiz */
     header {

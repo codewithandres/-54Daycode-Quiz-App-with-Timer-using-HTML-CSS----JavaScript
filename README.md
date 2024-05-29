@@ -1,3 +1,5 @@
+![image](https://github.com/dizedesign/-54Daycode-Quiz-App-with-Timer-using-HTML-CSS----JavaScript/assets/141795901/e8c5cace-9324-4827-b953-6deabb46330a)
+
 # Cuestionario Interactivo 📚🎮
 
 ¡Bienvenido a nuestro Cuestionario Interactivo! Este proyecto es una aplicación web dinámica que te permite responder a una serie de preguntas y obtener una puntuación basada en tus respuestas.

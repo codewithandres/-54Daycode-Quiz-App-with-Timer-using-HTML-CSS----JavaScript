@@ -8,6 +8,7 @@ const startBtn = document.querySelector('.start_btn button'),
 const optionList = document.querySelector('.option_list');
 const timeCount = document.querySelector('.timer .timer_second')
 const timeLine = document.querySelector('.time_line');
+const timeOff = document.querySelector('header .Time_text');
 
 startBtn.addEventListener('click', () => infoBox.classList.add('active'));
 
@@ -30,8 +31,39 @@ let counter;
 let couterLine;
 let timeValue = 15;
 let valueWhidth = 0;
+let userCore = 0;
 
 const nextBtn = quizBox.querySelector('.next-btn');
+const resultBox = document.querySelector('.result-box');
+const restarBtn = document.querySelector('.result-box .restart');
+const quitBtn = document.querySelector('.result-box .quit');
+
+console.log(quitBtn, restarBtn);
+
+quitBtn.addEventListener('click', () => window.location.reload());
+
+restarBtn.addEventListener('click', () => {
+
+    resultBox.classList.remove('activeResult');
+    quizBox.classList.add('activeQuiz')
+    let queCount = 0;
+    let queButtom = 1;
+    let couterLine;
+    let timeValue = 15;
+    let valueWhidth = 0;
+    let userCore = 0;
+
+    showQuestion(queCount);
+    queCounter(queButtom);
+    clearInterval(counter);
+    startTimer(timeValue);
+    clearInterval(couterLine);
+    counterTimeLIne(valueWhidth);
+
+    nextBtn.style.display = 'none';
+    timeOff.textContent = `Time Left`;
+
+})
 
 nextBtn.addEventListener('click', () => {
 
@@ -46,9 +78,15 @@ nextBtn.addEventListener('click', () => {
         startTimer(timeValue);
         clearInterval(couterLine);
         counterTimeLIne(valueWhidth);
+
+        nextBtn.style.display = 'none';
+        timeOff.textContent = `Time Left`;
+
     } else {
 
-        console.log('Question completed.');
+        clearInterval(counter);
+        clearInterval(couterLine);
+        showResultBox();
     };
 });
 
@@ -102,7 +140,10 @@ const optionSelected = answer => {
 
     clearInterval(counter);
     clearInterval(couterLine)
+
     if (userAnds === correntAns) {
+        userCore += 1;
+
         answer.parentElement.classList.add('correct');
         answer.parentElement.insertAdjacentHTML('beforeend', tickIcon);
     }
@@ -122,7 +163,29 @@ const optionSelected = answer => {
     for (let i = 0; i < allOption; i++) {
         optionList.children[i].classList.add('disable');
     };
+    nextBtn.style.display = 'block';
+};
 
+const showResultBox = () => {
+
+    infoBox.classList.remove('active');
+    quizBox.classList.remove('activeQuiz');
+    resultBox.classList.add('activeResult');
+
+    const scoreText = resultBox.querySelector('.score-text');
+
+    if (scoreText > 3) {
+        let scoreTag = ` <span>and congrats!, you got only <p>${userCore}</p> out of <p>${questions.length}</p></span>`;
+        scoreText.innerHTML = scoreTag;
+    }
+    else if (scoreText > 1) {
+        let scoreTag = ` <span>and nice!, you got only <p>${userCore}</p> out of <p>${questions.length}</p></span>`;
+        scoreText.innerHTML = scoreTag;
+    }
+    else {
+        let scoreTag = ` <span>and sorry, you got only <p>${userCore}</p> out of <p>${questions.length}</p></span>`;
+        scoreText.innerHTML = scoreTag;
+    };
 };
 
 const startTimer = time => {
@@ -138,7 +201,23 @@ const startTimer = time => {
 
         if (time < 0) {
             clearInterval(counter)
-            timeCount.textContent = `0:0s`
+            timeCount.textContent = `0:0s`;
+            timeOff.textContent = `Time off`;
+
+            let correntAns = questions[queCount].answer;
+            let allOption = optionList.children.length;
+
+            for (let i = 0; i < allOption; i++) {
+                if (optionList.children[i].textContent.trim() == correntAns) {
+
+                    optionList.children[i].classList.add('correct');
+                    optionList.children[i].insertAdjacentHTML('beforeend', tickIcon);
+                };
+            };
+            for (let i = 0; i < allOption; i++) {
+                optionList.children[i].classList.add('disable');
+            };
+            nextBtn.style.display = 'block';
         };
     }, 1000);
 };
@@ -159,4 +238,5 @@ const queCounter = index => {
     let totalQuestCountTag = `<span><p>${index}</p> Of <p>${questions.length}</p> Question</span>`;
     buttonQuestCounter.innerHTML = totalQuestCountTag;
 };
+
 
